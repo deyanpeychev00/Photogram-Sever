@@ -1,0 +1,19 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "image processing server",
+  "main": "./bin/http.js",
+  "scripts": {
+    "test": "test",
+    "start": "node ./bin/http"
+  },
+  "author": "Deyan Peychev",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "debug": "^3.1.0",
+    "express": "^4.16.3",
+    "multer": "^1.3.1",
+    "nodemon": "^1.18.2"
+  }
+}
