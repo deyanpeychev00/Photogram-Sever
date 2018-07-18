@@ -8,6 +8,8 @@ module.exports = (app) => {
 
     // Auth routes
     app.post('/login', authController.login);
+    app.post('/register', authController.register);
+    app.get('/logout', authController.logout);
 
     // Images routes
     app.get('/images', imageController.getAll);
