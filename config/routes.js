@@ -22,4 +22,5 @@ module.exports = (app) => {
     app.get('/journeys', journeyController.getAll);
     app.get('/journeys/:id', journeyController.getByID);
     app.get('/journey/images/:journeyID', journeyController.getImages);
+    app.get('/journey/featured/:journeyID', journeyController.getFeatured);
 };

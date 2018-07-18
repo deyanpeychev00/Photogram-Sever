@@ -9,5 +9,8 @@ module.exports = {
     },
     getImages: (req, res) => {
         retrieveController.getJourneyImages(req, res);
+    },
+    getFeatured: (req, res) => {
+        retrieveController.getJourneyFeaturedImage(req, res);
     }
 };

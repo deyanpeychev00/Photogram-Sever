@@ -30,7 +30,10 @@ module.exports = {
         }
     },
     fileNameGenerator: (file) => {
-        return Date.now() + '_' + Math.abs(Math.random() * (Number.MIN_SAFE_INTEGER - Number.MAX_SAFE_INTEGER) + Number.MAX_SAFE_INTEGER).toString() + path.extname(file.originalname)
+        return Date.now() + '_' +
+            Math.abs(Math.random() * (Number.MIN_SAFE_INTEGER - Number.MAX_SAFE_INTEGER) + Number.MAX_SAFE_INTEGER).toString() + '_' +
+            Math.abs(Math.random() * (Number.MIN_SAFE_INTEGER - Number.MAX_SAFE_INTEGER) + Number.MAX_SAFE_INTEGER).toString() +
+            path.extname(file.originalname)
     },
 
 };

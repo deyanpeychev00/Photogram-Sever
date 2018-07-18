@@ -26,12 +26,25 @@ module.exports = {
             });
     },
     getJourneyImages: (req, res) => {
-        var query = new Kinvey.Query();
+        let query = new Kinvey.Query();
         query.equalTo('journeyID', req.params['journeyID']);
         imagesCollection.find(query)
             .toPromise()
             .then(function onSuccess(data) {
                 res.send(variables.requestSuccess('Успешно заредихте снимките', data));
+            })
+            .catch(function onError(err) {
+                res.send(variables.requestFail(err.message));
+            });
+    },
+    getJourneyFeaturedImage: (req, res) => {
+        let query = new Kinvey.Query();
+        query.equalTo('journeyID', req.params['journeyID']);
+        query.limit = 1;
+        imagesCollection.find(query)
+            .toPromise()
+            .then(function onSuccess(data) {
+                res.send(variables.requestSuccess('Успешно заредихте снимката', data));
             })
             .catch(function onError(err) {
                 res.send(variables.requestFail(err.message));

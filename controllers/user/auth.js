@@ -8,6 +8,9 @@ module.exports = {
                 res.send(variables.requestSuccess('Успешно влизане', user.data));
             })
             .catch(function(error) {
+                if(Number(error.code) === 401){
+                    error.message = 'Грешно потребителско име или парола. Моля опитайте отново.';
+                }
                 res.send(variables.requestFail(error.message));
             });
     },
