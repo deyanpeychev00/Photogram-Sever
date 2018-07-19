@@ -49,5 +49,30 @@ module.exports = {
             .catch(function onError(err) {
                 res.send(variables.requestFail(err.message));
             });
+    },
+    getCurrentJourneyFields: (req, res) => {
+        let query = new Kinvey.Query();
+        query.equalTo('_id', req.params['journeyID']);
+        query.fields = ['_id','name','caption','ratings','totalReviewers','author'];
+        journeysCollection.find(query)
+            .toPromise()
+            .then(function onSuccess(data) {
+                res.send(variables.requestSuccess('Успешно заредихте детайлите на пътешествието', data));
+            })
+            .catch(function onError(err) {
+                res.send(variables.requestFail(err.message));
+            });
+    },
+    getJourneysForAdmin: (req, res) => {
+        let query = new Kinvey.Query();
+        query.fields = ['_id','name','author'];
+        journeysCollection.find(query)
+            .toPromise()
+            .then(function onSuccess(data) {
+                res.send(variables.requestSuccess('Успешно заредихте детайлите на пътешествието', data));
+            })
+            .catch(function onError(err) {
+                res.send(variables.requestFail(err.message));
+            });
     }
 };

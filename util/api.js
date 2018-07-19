@@ -20,6 +20,7 @@ module.exports = {
     },
     collections: {
         journeys: Kinvey.DataStore.collection('journeys'),
-        images: Kinvey.DataStore.collection('images')
+        images: Kinvey.DataStore.collection('images'),
+        users: Kinvey.DataStore.collection('users')
     }
 };
