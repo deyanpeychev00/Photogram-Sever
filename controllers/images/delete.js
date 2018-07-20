@@ -5,7 +5,7 @@ const imagesCollection = api.collections.images;
 
 module.exports = {
     deleteSpecificImage: (req, res) => {
-        const filename = req.body.picName;
+        const filename = req.body.picName || req.body.fileName;
         let path = __dirname + '/../../public/images/' + filename;
 
         fs.unlink(path, (err) => {

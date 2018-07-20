@@ -6,7 +6,69 @@ const imagesCollection = api.collections.images;
 
 module.exports = {
     getAllJourneys: (req, res) => {
-        journeysCollection.find()
+        let query = new Kinvey.Query();
+        query.descending("_kmd.ect");
+        query.limit = req.params['limit'];
+        query.skip = req.params['skip'];
+        query.fields = ['name', 'caption', 'author'];
+        journeysCollection.find(query)
+            .toPromise()
+            .then(function onSuccess(data) {
+                res.send(variables.requestSuccess('Успешно заредихте пътешествията', data));
+            })
+            .catch(function onError(err) {
+                res.send(variables.requestFail(err.message));
+            });
+    },
+    getMyJourneys: (req, res) => {
+        let query = new Kinvey.Query();
+        query.equalTo('author', req.params['author']);
+        query.descending("_kmd.ect");
+        query.limit = req.params['limit'];
+        query.skip = req.params['skip'];
+        query.fields = ['name', 'caption', 'author'];
+        journeysCollection.find(query)
+            .toPromise()
+            .then(function onSuccess(data) {
+                res.send(variables.requestSuccess('Успешно заредихте пътешествията', data));
+            })
+            .catch(function onError(err) {
+                res.send(variables.requestFail(err.message));
+            });
+    },
+    getJourneysByAuthor: (req, res) => {
+        let query = new Kinvey.Query();
+        query.matches('author', `^${req.params['author']}`);
+        query.descending("_kmd.ect");
+        query.limit = req.params['limit'];
+        query.skip = req.params['skip'];
+        query.fields = ['name', 'caption', 'author'];
+        journeysCollection.find(query)
+            .toPromise()
+            .then(function onSuccess(data) {
+                res.send(variables.requestSuccess('Успешно заредихте пътешествията', data));
+            })
+            .catch(function onError(err) {
+                res.send(variables.requestFail(err.message));
+            });
+    },
+    getAllUserJourneys: (req, res) => {
+        let query = new Kinvey.Query();
+        query.equalTo('author', req.params['author']);
+        journeysCollection.find(query)
+            .toPromise()
+            .then(function onSuccess(data) {
+                res.send(variables.requestSuccess('Успешно заредихте пътешествията', data));
+            })
+            .catch(function onError(err) {
+                res.send(variables.requestFail(err.message));
+            });
+    },
+    getJourneysInTimeFrame: (req, res) =>{
+        let query = new Kinvey.Query();
+        query.greaterThanOrEqualTo('_kmd.ect', req.params['from']).lessThanOrEqualTo('_kmd.ect', req.params['to']);
+        query.descending("_kmd.ect");
+        journeysCollection.find(query)
             .toPromise()
             .then(function onSuccess(data) {
                 res.send(variables.requestSuccess('Успешно заредихте пътешествията', data));
@@ -40,7 +102,6 @@ module.exports = {
     getJourneyFeaturedImage: (req, res) => {
         let query = new Kinvey.Query();
         query.equalTo('journeyID', req.params['journeyID']);
-        query.limit = 1;
         imagesCollection.find(query)
             .toPromise()
             .then(function onSuccess(data) {

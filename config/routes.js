@@ -23,8 +23,13 @@ module.exports = (app) => {
     app.get('/images/ids/:journeyID', imageController.getIDs);
 
     // Journeys routes
-    app.get('/journeys', journeyController.getAll);
+    app.get('/journeys/:limit/:skip', journeyController.getAll);
+    app.get('/journeys/mine/:author/:limit/:skip', journeyController.getMine);
+    app.get('/journeys/user/:author/:limit/:skip', journeyController.getByUser);
+    app.get('/journeys/user/ids/:userID/:limit/:skip', journeyController.getByUser);
+    app.get('/journeys/user/all/:author', journeyController.getAllByUser);
     app.get('/journeys/:id', journeyController.getByID);
+    app.get('/journeys/timeframe/:from/:to', journeyController.getInTimeFrame);
     app.get('/journey/images/:journeyID', journeyController.getImages);
     app.get('/journey/featured/:journeyID', journeyController.getFeatured);
     app.put('/journey/update/:journeyID', journeyController.update);
@@ -37,4 +42,6 @@ module.exports = (app) => {
     app.get('/users/all', adminController.getAllUsers);
     app.get('/users/single/:userID', adminController.getSingleUser);
     app.put('/users/update', adminController.updateUser);
+    app.delete('/users/delete/server/:userID', adminController.deleteFromServer);
+    app.delete('/users/delete/database/:userID', adminController.deleteFromDataBase);
 };

@@ -30,5 +30,17 @@ module.exports = {
     },
     delete: (req, res) => {
         deleteController.deleteJourney(req, res);
+    },
+    getMine: (req, res) => {
+        retrieveController.getMyJourneys(req, res);
+    },
+    getByUser: (req, res) => {
+        retrieveController.getJourneysByAuthor(req, res);
+    },
+    getAllByUser: (req, res) => {
+        retrieveController.getAllUserJourneys(req, res);
+    },
+    getInTimeFrame: (req, res) => {
+        retrieveController.getJourneysInTimeFrame(req, res);
     }
 };

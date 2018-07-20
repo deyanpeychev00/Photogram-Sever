@@ -33,5 +33,26 @@ module.exports = {
             .catch(function onError(error) {
                 res.send(variables.requestFail(error.message));
             });
+    },
+    deleteFromServer: (req, res) => {
+        console.log(req.params['userID']);
+        const promise = Kinvey.User.remove(req.params['userID'], {
+            hard: true
+        })
+            .then(function(data) {
+                res.send(variables.requestSuccess('Потребителят е изтрит успешно', data));
+            })
+            .catch(function(error) {
+                res.send(variables.requestFail(error.message));
+            });
+    },
+    deleteFromDataBase: (req, res) => {
+        const promise = usersCollection.removeById(req.params['userID'])
+            .then(function onSuccess(entity) {
+                res.send(variables.requestSuccess('Данните за потребителя са изтрити успешно', entity))
+            })
+            .catch(function onError(error) {
+                res.send(variables.requestFail(error.message));
+            });
     }
 };
