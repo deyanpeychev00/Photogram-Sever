@@ -2,6 +2,7 @@ const path = require('path');
 
 module.exports = {
     environment: 'development',
+    def: 'photogramdefault',
     requestFail: (reason) => {
         return {
             success: false,

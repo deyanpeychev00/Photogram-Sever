@@ -6,12 +6,14 @@ const adminController = require('../controllers/user/admin');
 module.exports = (app) => {
     // Index route
     app.get('/', imageController.index);
+    app.get('/api', authController.getApiDetails);
 
     // Auth routes
-    app.post('/login', authController.login);
+/*    app.post('/login', authController.login);
     app.post('/register', authController.register);
     app.get('/logout', authController.logout);
-
+*/
+    app.post('/user/save', authController.saveUser);
     // Images routes
     app.get('/images', imageController.getAll);
     app.get('/images/get/all', imageController.getAll);
