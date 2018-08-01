@@ -5,7 +5,6 @@ function signDefaultActiveUser(){
     const promise = Kinvey.User.login(def, def)
         .then(function (user) {
             console.log("Default user logged in.");
-            console.log(Kinvey.User.getActiveUser());
         })
         .catch(function (error) {
             console.log(error);
