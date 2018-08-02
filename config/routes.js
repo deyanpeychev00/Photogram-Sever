@@ -7,6 +7,7 @@ module.exports = (app) => {
     // Index route
     app.get('/', imageController.index);
     app.get('/api', authController.getApiDetails);
+    app.get('/storage/:username', authController.createUserFolder);
 
     // Auth routes
 /*    app.post('/login', authController.login);
@@ -17,10 +18,10 @@ module.exports = (app) => {
     // Images routes
     app.get('/images', imageController.getAll);
     app.get('/images/get/all', imageController.getAll);
-    app.get('/images/get/single/:filename', imageController.getSpecific);
+    app.get('/images/get/single/:userFolder/:filename', imageController.getSpecific);
     app.post('/images/delete', imageController.deleteSpecific);
     app.delete('/images/kinvey/delete/:photoID', imageController.deleteFromKinvey);
-    app.post('/images/upload', imageController.upload);
+    app.post('/images/upload/:username', imageController.upload);
     app.post('/images/kinvey/upload', imageController.uploadToKinvey);
     app.get('/images/ids/:journeyID', imageController.getIDs);
 

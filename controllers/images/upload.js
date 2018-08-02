@@ -5,9 +5,10 @@ const path = require('path');
 const api = require('../../util/api');
 const imagesCollection = api.collections.images;
 
-// Initialize storage options
 const storage = multer.diskStorage({
-    destination: __dirname + '/../../public/images',
+    destination: function(req, file, cb) {
+        cb(null, __dirname + '/../../public/images/'+ req.params.username);
+    },
     filename: function (req, file, cb) {
         cb(null, variables.fileNameGenerator(file));
     }
@@ -30,7 +31,9 @@ module.exports = {
                 if (req.files === undefined) {
                     res.send(variables.requestFail('Няма избран файл'));
                 } else {
-                    res.send(variables.requestSuccess('Файлът е успешно качен', req.files[0]));
+                    const pathElements = req.files[0].path.split('\\').filter( s => s !== '');
+                    const filePath = pathElements[pathElements.length - 2] + '/' + pathElements[pathElements.length - 1];
+                    res.send(variables.requestSuccess('Файлът е успешно качен', {filename: filePath}));
                 }
             }
         });

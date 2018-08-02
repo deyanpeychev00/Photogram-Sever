@@ -20,7 +20,7 @@ module.exports = {
         if (req.params['filename'] === 'undefined' || req.params['filename'] === '') {
             res.send(variables.requestFail('Не е посочено име на файла'));
         } else {
-            let filepath = (path.join(config[variables.environment].rootFolder, 'public', 'images', req.params['filename']));
+            let filepath = (path.join(config[variables.environment].rootFolder, 'public', 'images', req.params['userFolder'], req.params['filename']));
             res.sendFile(filepath);
         }
     },

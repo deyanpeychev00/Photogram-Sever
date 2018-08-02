@@ -2,6 +2,14 @@ const Kinvey = require('kinvey-node-sdk');
 const variables = require('./../../util/variables');
 const api = require('./../../util/api');
 const usersCollection = require('./../../util/api').collections.users;
+const fs = require('fs');
+
+function createUserFolder(username) {
+    const dir = __dirname + '/../../public/images/' + username;
+    if (!fs.existsSync(dir)){
+        fs.mkdirSync(dir);
+    }
+}
 
 module.exports = {
     getApiDetails: (req, res) => {
@@ -28,5 +36,9 @@ module.exports = {
             .catch(function (err) {
                 res.send(variables.requestFail(err.message));
             })
+    },
+    createUserFolder: (req, res) => {
+        createUserFolder(req.params.username);
     }
-};
+}
+;
