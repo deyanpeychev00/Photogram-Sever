@@ -8,6 +8,7 @@ module.exports = (app) => {
     app.get('/', imageController.index);
     app.get('/api', authController.getApiDetails);
     app.get('/storage/:username', authController.createUserFolder);
+    app.get('/users/delete/storage/:username', adminController.deleteUserDirectory);
 
     // Auth routes
 /*    app.post('/login', authController.login);
@@ -17,7 +18,7 @@ module.exports = (app) => {
     app.post('/user/save', authController.saveUser);
     // Images routes
     app.get('/images', imageController.getAll);
-    app.get('/images/get/all', imageController.getAll);
+    app.get('/images/all', imageController.getAll);
     app.get('/images/get/single/:userFolder/:filename', imageController.getSpecific);
     app.post('/images/delete', imageController.deleteSpecific);
     app.delete('/images/kinvey/delete/:photoID', imageController.deleteFromKinvey);

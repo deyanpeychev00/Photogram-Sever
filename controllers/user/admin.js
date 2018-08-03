@@ -1,6 +1,7 @@
 const Kinvey = require('kinvey-node-sdk');
 const usersCollection = require('./../../util/api').collections.users;
 const variables = require('./../../util/variables');
+const fs = require('fs');
 
 module.exports = {
     getAllUsers: (req, res) => {
@@ -54,5 +55,10 @@ module.exports = {
             .catch(function onError(error) {
                 res.send(variables.requestFail(error.message));
             });
+    },
+    deleteUserDirectory: (req, res) => {
+        fs.rmdir(__dirname + '/../../public/images/'+ req.params.username, (cb) => {
+            res.send(cb);
+        });
     }
 };
