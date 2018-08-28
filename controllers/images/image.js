@@ -12,11 +12,17 @@ module.exports = {
     getSpecific: (req, res) => {
         retrieveController.getSpecificImage(req, res);
     },
+    getAvatar: (req, res) => {
+        retrieveController.getUserAvatar(req, res);
+    },
     deleteSpecific: (req, res) => {
         deleteController.deleteSpecificImage(req, res);
     },
     upload: (req, res) => {
         uploadController.uploadSingleImage(req, res);
+    },
+    uploadAvatar: (req, res) => {
+        uploadController.uploadUserAvatar(req, res);
     },
     getIDs: (req, res) => {
         retrieveController.getJourneyImagesIDs(req, res);

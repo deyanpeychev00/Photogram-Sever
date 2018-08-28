@@ -26,6 +26,18 @@ module.exports = {
                 res.send(variables.requestFail(err.message));
             });
     },
+    getUserByUsername: (req, res) => {
+        let query = new Kinvey.Query();
+        query.equalTo('username', req.params['uName']);
+        usersCollection.find(query)
+            .toPromise()
+            .then(function onSuccess(data) {
+                res.send(variables.requestSuccess('Успешно взехте данните за потребителя', data));
+            })
+            .catch(function onError(err) {
+                res.send(variables.requestFail(err.message));
+            });
+    },
     updateUser: (req, res) => {
         const promise = usersCollection.save(req.body)
             .then(function onSuccess(entity) {

@@ -23,6 +23,8 @@ module.exports = (app) => {
     app.post('/images/delete', imageController.deleteSpecific);
     app.delete('/images/kinvey/delete/:photoID', imageController.deleteFromKinvey);
     app.post('/images/upload/:username', imageController.upload);
+    app.post('/avatar/upload/:username', imageController.uploadAvatar);
+    app.get('/avatar/get/:filename', imageController.getAvatar);
     app.post('/images/kinvey/upload', imageController.uploadToKinvey);
     app.get('/images/ids/:journeyID', imageController.getIDs);
 
@@ -45,6 +47,7 @@ module.exports = (app) => {
     // Users routes
     app.get('/users/all', adminController.getAllUsers);
     app.get('/users/single/:userID', adminController.getSingleUser);
+    app.get('/users/username/:uName', adminController.getUserByUsername);
     app.put('/users/update', adminController.updateUser);
     app.delete('/users/delete/server/:userID', adminController.deleteFromServer);
     app.delete('/users/delete/database/:userID', adminController.deleteFromDataBase);

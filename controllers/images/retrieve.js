@@ -24,6 +24,10 @@ module.exports = {
             res.sendFile(filepath);
         }
     },
+    getUserAvatar:(req, res) => {
+        let filepath = (path.join(config[variables.environment].rootFolder, 'public', 'avatars', req.params['filename']));
+        res.sendFile(filepath);
+    },
     getJourneyImagesIDs: (req, res) => {
         let query = new Kinvey.Query();
         query.equalTo('journeyID', req.params['journeyID']);

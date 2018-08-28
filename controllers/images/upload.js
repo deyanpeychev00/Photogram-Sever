@@ -14,11 +14,28 @@ const storage = multer.diskStorage({
     }
 });
 
+const avatarStorage = multer.diskStorage({
+    destination: function(req, file, cb) {
+        cb(null, __dirname + '/../../public/avatars');
+    },
+    filename: function (req, file, cb) {
+        console.log(req.params);
+        cb(null, variables.avatarNameGenerator(req.params.username, file));
+    }
+});
+
 // Initialize upload options
 const upload = multer({
     storage: storage,
     fileFilter: function (req, file, cb) {
         variables.checkFileType(file, cb);
+    }
+}).any();
+
+const avatar = multer({
+    storage: avatarStorage,
+    fileFilter: function (req, file, cb) {
+        variables.checkAvatarType(file, cb);
     }
 }).any();
 
@@ -33,6 +50,20 @@ module.exports = {
                 } else {
                     const pathElements = req.files[0].path.split('\\').filter( s => s !== '');
                     const filePath = pathElements[pathElements.length - 2] + '/' + pathElements[pathElements.length - 1];
+                    res.send(variables.requestSuccess('Файлът е успешно качен', {filename: filePath}));
+                }
+            }
+        });
+    },
+    uploadUserAvatar: (req, res) => {
+        avatar(req, res, (err) => {
+            if (err) {
+                res.send(variables.requestFail(err));
+            } else {
+                if (req.files === undefined) {
+                    res.send(variables.requestFail('Няма избран файл'));
+                } else {
+                    const filePath = req.files[0].filename;
                     res.send(variables.requestSuccess('Файлът е успешно качен', {filename: filePath}));
                 }
             }
