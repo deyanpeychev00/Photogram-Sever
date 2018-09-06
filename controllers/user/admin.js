@@ -72,5 +72,10 @@ module.exports = {
         fs.rmdir(__dirname + '/../../public/images/'+ req.params.username, (cb) => {
             res.send(cb);
         });
-    }
+    },
+    deleteUserAvatar: (req, res) => {
+        fs.unlink(__dirname + '/../../public/avatars/'+ req.params.avatarName, (cb) => {
+            res.send(cb);
+        });
+    },
 };

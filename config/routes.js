@@ -9,6 +9,7 @@ module.exports = (app) => {
     app.get('/api', authController.getApiDetails);
     app.get('/storage/:username', authController.createUserFolder);
     app.get('/users/delete/storage/:username', adminController.deleteUserDirectory);
+    app.get('/users/delete/avatar/:avatarName', adminController.deleteUserAvatar);
 
     // Auth routes
 /*    app.post('/login', authController.login);

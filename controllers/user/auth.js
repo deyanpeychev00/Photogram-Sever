@@ -28,7 +28,8 @@ module.exports = {
             firstName: user.firstName,
             lastName: user.lastName,
             blocked: user.blocked,
-            roles: user.roles
+            roles: user.roles,
+            avatar: user.avatar
         })
             .then(function (d) {
                 res.send(variables.requestSuccess('Успешно запазихте детайлите за потребителя', d));
